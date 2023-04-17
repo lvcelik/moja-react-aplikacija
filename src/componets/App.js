@@ -8,6 +8,10 @@ import { broj1, broj2, Osoba, pi, imeAplikacije as mojaVarijabla, sum, oduzimanj
 //import { sum, pi, imeAplikacije as mojaVarijabla, num1 as broj1, num2 as broj2} from './Utility'
 
 
+//5.5
+import './Komponenta1';
+
+
 
 function App() {
   var zbroj = sum(10, 12) * pi + (broj1 * broj2);
@@ -17,24 +21,30 @@ function App() {
   console.log("Random string = " + rndStr);
   var od = oduzimanje(broj1, broj2);
 
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          {mojaVarijabla}, {rndStr}, {Osoba.name}, Godine: {Osoba.godine}, {zbroj}, {od}
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  //5.5
+  var prva = "prvi text";
+  var druga = "drugi text";
+
+  return <Komponenta1>;
+
+  // return (
+  //   <div className="App">
+  //     <header className="App-header">
+  //       <img src={logo} className="App-logo" alt="logo" />
+  //       <p>
+  //         {mojaVarijabla}, {rndStr}, {Osoba.name}, Godine: {Osoba.godine}, {zbroj}, {od}
+  //       </p>
+  //       <a
+  //         className="App-link"
+  //         href="https://reactjs.org"
+  //         target="_blank"
+  //         rel="noopener noreferrer"
+  //       >
+  //         Learn React
+  //       </a>
+  //     </header>
+  //   </div>
+  // );
 }
 
 export default App;
