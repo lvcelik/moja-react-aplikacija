@@ -1,5 +1,5 @@
 export function WelcomeFunkcija() {
     return (
-      <h2>Weolcome! Komponenta definirana funckijom.</h2>
+      <h2>Welcome! Komponenta definirana funckijom.</h2>
     );
   }

@@ -17,6 +17,11 @@ import {GlavnaKomponenta} from './GlavnaKomponenta';
 //import React from 'react';
 import {WelcomeFunkcija} from './WelcomeFunkcija';
 import {WelcomeKlasa} from './WelcomeKlasa';
+import React from 'react';
+import KorisnikKlasa from './KorisnikKlasa';
+import KorisnikFunckija from './KorisnikFunckija';
+import KorisnikDijete from './KorisnikDijete';
+
 
 // function WelcomeFunkcija() {
 //   return (
@@ -34,7 +39,34 @@ import {WelcomeKlasa} from './WelcomeKlasa';
 // }
 
 
-function App() {
+class App extends React.Component {
+
+  state = {
+    korisnici: [
+      {ime: "Marko", godine: 27},
+      {ime: "Katarina", godine: 21},
+      {ime: "Nataša", godine: 20},
+      {ime: "Sunčica", godine: 5}
+    ],
+    dodatni_tekst : "Ona voli plivati i roniti"
+  };
+
+  promijeniGodine = () => {
+    //console.log("kliknuli smo na button...");
+    const {korisnici} = this.state;
+    const novikorisnici = korisnici.map( korisnik =>
+      {
+      return {...korisnik,godine: korisnik.godine + 1}
+      }
+      );
+      this.setState({korisnici: novikorisnici});
+  };
+
+  render () {
+    const {korisnici, dodatni_tekst} = this.state;
+
+
+
   var zbroj = sum(10, 12) * pi + (broj1 * broj2);
   var rndStr = randomstring.generate({
     length: 8
@@ -47,7 +79,7 @@ function App() {
   var druga = "drugi text";
 
   //return <Komponenta1>;
-
+  
   return (
     <div className="App">
       <header className="App-header">
@@ -72,8 +104,16 @@ function App() {
             <WelcomeFunkcija/>
             <WelcomeKlasa/>
 
-     </div>
-   );
+            <KorisnikKlasa ime={korisnici[0].ime} godine={korisnici[0].godine} onButtonClick={this.promijeniGodine}/>
+            <KorisnikKlasa ime={korisnici[1].ime} godine={korisnici[1].godine} onButtonClick={this.promijeniGodine} />
+            
+            <KorisnikFunckija ime={korisnici[2].ime} godine={korisnici[2].godine} />
+
+            <KorisnikDijete ime={korisnici[3].ime} godine={korisnici[3].godine} >{this.state.dodatni_tekst}</KorisnikDijete>
+            
+
+     </div>);
+  };
 }
 
 export default App;
