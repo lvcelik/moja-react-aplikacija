@@ -39,31 +39,40 @@ import KorisnikDijete from './KorisnikDijete';
 // }
 
 
-class App extends React.Component {
+function App () {
 
-  state = {
-    korisnici: [
+  const [korisnici, setKorisnici] = React.useState ([
       {ime: "Marko", godine: 27},
       {ime: "Katarina", godine: 21},
       {ime: "Nataša", godine: 20},
       {ime: "Sunčica", godine: 5}
-    ],
-    dodatni_tekst : "Ona voli plivati i roniti"
-  };
+  ]);
 
-  promijeniGodine = () => {
+  const promijeniGodine = () => {
     //console.log("kliknuli smo na button...");
-    const {korisnici} = this.state;
+    //const {korisnici} = this.state;
     const novikorisnici = korisnici.map( korisnik =>
       {
       return {...korisnik,godine: korisnik.godine + 1}
       }
       );
-      this.setState({korisnici: novikorisnici});
+      setKorisnici(novikorisnici);
   };
 
-  render () {
-    const {korisnici, dodatni_tekst} = this.state;
+  const promijeniIme = event => {
+    const novikorisnici = korisnici.map( korisnik =>
+      {
+        var rndName = randomstring.generate({
+          length: 8
+        });
+      return {...korisnik, ime: rndName}
+      }
+      );
+      setKorisnici(novikorisnici);
+  };
+
+  
+    //const {korisnici, dodatni_tekst} = this.state;
 
 
 
@@ -104,16 +113,18 @@ class App extends React.Component {
             <WelcomeFunkcija/>
             <WelcomeKlasa/>
 
-            <KorisnikKlasa ime={korisnici[0].ime} godine={korisnici[0].godine} onButtonClick={this.promijeniGodine}/>
-            <KorisnikKlasa ime={korisnici[1].ime} godine={korisnici[1].godine} onButtonClick={this.promijeniGodine} />
+            <KorisnikKlasa ime={korisnici[0].ime} godine={korisnici[0].godine} onButtonClick={promijeniGodine}/>
+            <KorisnikKlasa ime={korisnici[1].ime} godine={korisnici[1].godine} onButtonClick={promijeniGodine} />
             
-            <KorisnikFunckija ime={korisnici[2].ime} godine={korisnici[2].godine} />
+            <KorisnikFunckija ime={korisnici[2].ime} godine={korisnici[2].godine} onNameChange={promijeniIme} />
 
-            <KorisnikDijete ime={korisnici[3].ime} godine={korisnici[3].godine} >{this.state.dodatni_tekst}</KorisnikDijete>
+            <KorisnikDijete ime={korisnici[3].ime} godine={korisnici[3].godine} >
+              Voli plivati i roniti
+            </KorisnikDijete>
             
 
      </div>);
   };
-}
+
 
 export default App;
