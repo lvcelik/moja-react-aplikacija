@@ -9,18 +9,58 @@ import { broj1, broj2, Osoba, pi, imeAplikacije as mojaVarijabla, sum, oduzimanj
 
 
 //5.5
-import { Komponenta1} from './Komponenta1';
-import { Komponenta2} from './Komponenta2';
-import  Komponenta3 from './Komponenta3';
+import { Komponenta1 } from './Komponenta1';
+import { Komponenta2 } from './Komponenta2';
+import Komponenta3 from './Komponenta3';
 
-import {GlavnaKomponenta} from './GlavnaKomponenta';
+import { GlavnaKomponenta } from './GlavnaKomponenta';
 //import React from 'react';
-import {WelcomeFunkcija} from './WelcomeFunkcija';
-import {WelcomeKlasa} from './WelcomeKlasa';
+import { WelcomeFunkcija } from './WelcomeFunkcija';
+import { WelcomeKlasa } from './WelcomeKlasa';
 import React from 'react';
 import KorisnikKlasa from './KorisnikKlasa';
 import KorisnikFunckija from './KorisnikFunckija';
 import KorisnikDijete from './KorisnikDijete';
+import Korisnik from './Korisnik'
+
+export default class App extends React.Component {
+    state = {
+      korisnici: [
+        {id:1, name:"Goran", years: 30},
+        {id:2, name: "Lovro", years: 30},
+        {id:3, name:"Lovro", years: 30},
+        {id:4, name:"Lovro", years: 30},
+        {id:5, name:"Lovro", years: 30},
+      ]
+    }
+
+    handleNameChanged = (event, index) => {
+      console.log("handleNameChanged");
+      const {korisnici} = this.state;
+      const noviKorisnici = [...korisnici];
+      noviKorisnici[index].name = event.target.value;
+      this.setState({korisnici: noviKorisnici})
+
+    };
+
+    render() {
+      const {korisnici} = this.state
+      return (
+        <div className='App'>
+          {korisnici.map((korisnik, index) => (
+            <Korisnik
+            key={korisnik.id}
+            name={korisnik.name}
+            years={korisnik.years}
+            onNameChanged={event => this.handleNameChanged(event, index)}
+            />
+          ),
+          )};
+        </div>
+      );
+
+    };
+  };
 
 
 // function WelcomeFunkcija() {
@@ -39,81 +79,94 @@ import KorisnikDijete from './KorisnikDijete';
 // }
 
 
-class App extends React.Component {
+// function App() {
 
-  state = {
-    korisnici: [
-      {ime: "Marko", godine: 27},
-      {ime: "Katarina", godine: 21},
-      {ime: "Nataša", godine: 20},
-      {ime: "Sunčica", godine: 5}
-    ],
-    dodatni_tekst : "Ona voli plivati i roniti"
-  };
+//   const [korisnici, setKorisnici] = React.useState([
+//     { ime: "Marko", godine: 27 },
+//     { ime: "Katarina", godine: 21 },
+//     { ime: "Nataša", godine: 20 },
+//     { ime: "Sunčica", godine: 5 }
+//   ]);
 
-  promijeniGodine = () => {
-    //console.log("kliknuli smo na button...");
-    const {korisnici} = this.state;
-    const novikorisnici = korisnici.map( korisnik =>
-      {
-      return {...korisnik,godine: korisnik.godine + 1}
-      }
-      );
-      this.setState({korisnici: novikorisnici});
-  };
+//   const promijeniGodine = () => {
+//     //console.log("kliknuli smo na button...");
+//     //const {korisnici} = this.state;
+//     const novikorisnici = korisnici.map(korisnik => {
+//       return { ...korisnik, godine: korisnik.godine + 1 }
+//     }
+//     );
+//     setKorisnici(novikorisnici);
+//   };
 
-  render () {
-    const {korisnici, dodatni_tekst} = this.state;
+//   const promijeniIme = event => {
+//     const novikorisnici = korisnici.map(korisnik => {
+//       var rndName = randomstring.generate({
+//         length: 8
+//       });
+//       return { ...korisnik, ime: rndName }
+//     }
+//     );
+//     setKorisnici(novikorisnici);
+//   };
 
 
 
-  var zbroj = sum(10, 12) * pi + (broj1 * broj2);
-  var rndStr = randomstring.generate({
-    length: 8
-  });
-  console.log("Random string = " + rndStr);
-  var od = oduzimanje(broj1, broj2);
 
-  //5.5
-  var prva = "prvi text";
-  var druga = "drugi text";
+//   //const {korisnici, dodatni_tekst} = this.state;
 
-  //return <Komponenta1>;
+
+
+//   var zbroj = sum(10, 12) * pi + (broj1 * broj2);
+//   var rndStr = randomstring.generate({
+//     length: 8
+//   });
+//   console.log("Random string = " + rndStr);
+//   var od = oduzimanje(broj1, broj2);
+
+//   //5.5
+//   var prva = "prvi text";
+//   var druga = "drugi text";
+
+//   //return <Komponenta1>;
   
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          {mojaVarijabla}, {rndStr}, {Osoba.name}, Godine: {Osoba.godine}, {zbroj}, {od}
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-            <Komponenta1/>
-            <Komponenta2 podatak1={prva}/>
-            <Komponenta3 podatak1={prva} podatak2={druga}/>
 
-            <GlavnaKomponenta/>
-            <WelcomeFunkcija/>
-            <WelcomeKlasa/>
+//   return (
+//     <div className="App">
+//       <header className="App-header">
+//         <img src={logo} className="App-logo" alt="logo" />
+//         <p>
+//           {mojaVarijabla}, {rndStr}, {Osoba.name}, Godine: {Osoba.godine}, {zbroj}, {od}
+//         </p>
+//         <a
+//           className="App-link"
+//           href="https://reactjs.org"
+//           target="_blank"
+//           rel="noopener noreferrer"
+//         >
+//           Learn React
+//         </a>
+//       </header>
+//       <Komponenta1 />
+//       <Komponenta2 podatak1={prva} />
+//       <Komponenta3 podatak1={prva} podatak2={druga} />
 
-            <KorisnikKlasa ime={korisnici[0].ime} godine={korisnici[0].godine} onButtonClick={this.promijeniGodine}/>
-            <KorisnikKlasa ime={korisnici[1].ime} godine={korisnici[1].godine} onButtonClick={this.promijeniGodine} />
-            
-            <KorisnikFunckija ime={korisnici[2].ime} godine={korisnici[2].godine} />
+//       <GlavnaKomponenta />
+//       <WelcomeFunkcija />
+//       <WelcomeKlasa />
 
-            <KorisnikDijete ime={korisnici[3].ime} godine={korisnici[3].godine} >{this.state.dodatni_tekst}</KorisnikDijete>
-            
+//       <KorisnikKlasa ime={korisnici[0].ime} godine={korisnici[0].godine} onButtonClick={promijeniGodine} />
+//       <KorisnikKlasa ime={korisnici[1].ime} godine={korisnici[1].godine} onButtonClick={promijeniGodine} />
 
-     </div>);
-  };
-}
+//       <KorisnikFunckija ime={korisnici[2].ime} godine={korisnici[2].godine} onNameChange={promijeniIme} />
 
-export default App;
+//       <KorisnikDijete ime={korisnici[3].ime} godine={korisnici[3].godine} >
+//         Voli plivati i roniti
+//       </KorisnikDijete>
+
+
+
+//     </div>);
+// };
+
+
+// export default App;
